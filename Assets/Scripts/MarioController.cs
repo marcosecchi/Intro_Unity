@@ -12,6 +12,6 @@ public class MarioController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // rb.AddForce(3, 0, 0);
+        rb.AddForce(3, 0, 0);
     }
 }
