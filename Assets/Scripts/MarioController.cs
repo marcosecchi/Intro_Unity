@@ -6,7 +6,7 @@ public class MarioController : MonoBehaviour
 
     public float speed = 1.0f;
     public float jumpForce = 1.0f;
-    public KeyCode key = KeyCode.Space;
+    public KeyCode jumpKey = KeyCode.Space;
 
     public ForceMode forceMode;
 
@@ -25,7 +25,7 @@ public class MarioController : MonoBehaviour
         float hMove = Input.GetAxis("Horizontal") * speed;
         rb.AddForce(hMove, 0, 0, forceMode);
 
-        if(Input.GetKeyDown(key) && !_isJumping)
+        if(Input.GetKeyDown(jumpKey) && !_isJumping)
         {
             _isJumping = true;
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
