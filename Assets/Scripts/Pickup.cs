@@ -5,6 +5,8 @@ public class Pickup : MonoBehaviour
 {
     BoxCollider boxCollider;
 
+    public Light lightRef;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +22,37 @@ public class Pickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (!other.gameObject.CompareTag("Player")) return;
+
+        MarioController mc = other.gameObject.GetComponent<MarioController>();
+        if(mc != null)
+        {
+            mc.jumpForce *= 10;
+
+            if (lightRef != null)
+            {
+                lightRef.intensity = 10;
+            }
+        }
+//        Destroy(gameObject);
+
+     //   gameObject.SetActive(false);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Player")) return;
+
+        MarioController mc = other.gameObject.GetComponent<MarioController>();
+        if (mc != null)
+        {
+            mc.jumpForce /= 10;
+
+            if (lightRef != null)
+            {
+                lightRef.intensity = 0;
+            }
+        }
+
     }
 }
