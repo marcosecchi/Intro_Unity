@@ -28,11 +28,17 @@ public class MarioController : MonoBehaviour
         float hMove = Input.GetAxis("Horizontal") * speed;
         rb.AddForce(hMove, 0, 0, forceMode);
 
-        if(Input.GetKeyDown(jumpKey) && !_isJumping)
+        if (
+            Input.GetKeyDown(jumpKey) && // E' stato premuto il tasto jump
+            Mathf.Abs(rb.linearVelocity.y) <= Mathf.Epsilon // Non sto saltando (velocità verticale pari a zero)
+            )
         {
             _duration = 0;
         }
-        else if (Input.GetKeyUp(jumpKey) && !_isJumping)
+        else if (
+            Input.GetKeyUp(jumpKey) && // E' stato rilasciato il tasto jump
+            Mathf.Abs(rb.linearVelocity.y) <= Mathf.Epsilon // Non sto saltando (velocità verticale pari a zero)
+            )
         {
             _isJumping = true;
 
@@ -48,15 +54,7 @@ public class MarioController : MonoBehaviour
         }
         _duration += Time.deltaTime;
 
-           Debug.Log(_duration);
+        
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        _isJumping = false;
-        if(collision.gameObject.CompareTag("Distruggibile"))
-        {
-            Destroy(collision.gameObject);
-        }
-    }
 }
