@@ -372,7 +372,8 @@ MonoBehaviour:
   rb: {fileID: 494550252}
   speed: 4
   jumpForce: 5
-  key: 32
+  longPressLimit: 1
+  jumpKey: 32
   forceMode: 0
 --- !u!1 &617513535
 GameObject:
